@@ -43,9 +43,9 @@ export class BoardsService {
     }
 
     //Id로 특정 게시물 삭제하기
-    async deleteBoard(id:number) : Promise<void> {
+    async deleteBoard(id:number, user:User) : Promise<void> {
 
-        const result = await this.boardRepository.delete(id);
+        const result = await this.boardRepository.delete({id, user:user});
 
         if(result.affected === 0 ){
             throw new NotFoundException(`Can't find Board with id ${id}`);
